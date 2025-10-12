@@ -1,5 +1,9 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/maintenance.html" }
+  "redirects": [
+    {
+      "source": "/(?!css|js|images|favicon\\.ico|maintenance\\.html).*",
+      "destination": "/maintenance.html",
+      "statusCode": 503
+    }
   ]
 }

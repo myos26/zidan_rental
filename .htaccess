@@ -1,0 +1,19 @@
+RewriteEngine On
+
+# Jangan redirect file atau folder asset (biar CSS/JS/gambar tetap bisa di-load)
+RewriteCond %{REQUEST_URI} !^/maintenance\.html$
+RewriteCond %{REQUEST_URI} !\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|map)$
+RewriteCond %{REQUEST_URI} !^/images/
+RewriteCond %{REQUEST_URI} !^/css/
+RewriteCond %{REQUEST_URI} !^/js/
+RewriteCond %{REQUEST_URI} !^/favicon\.ico$
+
+# Arahkan semua request ke maintenance.html dengan status 503
+RewriteRule ^.*$ /maintenance.html [R=503,L]
+
+# Optional: Set status code 503 secara eksplisit untuk SEO/robots
+<IfModule mod_headers.c>
+  Header set Retry-After "3600"
+</IfModule>
+
+ErrorDocument 503 /maintenance.html

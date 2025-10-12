@@ -14,47 +14,45 @@ document.querySelectorAll('[data-include]').forEach(el => {
 });
 
 
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
   const preloader = document.getElementById("preloader");
   const mainContent = document.getElementById("main-content");
 
-  // Sembunyikan konten saat preloader aktif
-  if (mainContent) {
-    mainContent.classList.add("hidden");
-  }
-
-  // Setelah 1 detik, tampilkan konten dan fade out preloader
+  // Setelah halaman benar-benar load, sembunyikan preloader pelan-pelan
   setTimeout(() => {
-    if (preloader) preloader.classList.add("hidden");
-    if (mainContent) mainContent.classList.remove("hidden");
-  }, 1000);
+    if (preloader) preloader.classList.add("fade-out");
+    setTimeout(() => {
+      if (preloader) preloader.classList.add("hidden");
+      if (mainContent) mainContent.classList.remove("hidden");
+    }, 300);
+  }, 500); // delay kecil biar efeknya smooth
 
-  // Handle klik link
-  document.querySelectorAll("a").forEach(link => {
+  // Delegasi event ke seluruh dokumen untuk handle klik link (termasuk navbar)
+  document.body.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
+    if (!link) return;
+
     const href = link.getAttribute("href");
-
     if (
-      href &&
-      !href.startsWith("#") &&
-      !href.startsWith("javascript") &&
-      !link.hasAttribute("target")
-    ) {
-      link.addEventListener("click", e => {
-        e.preventDefault();
+      !href ||
+      href.startsWith("#") ||
+      href.startsWith("javascript") ||
+      link.hasAttribute("target")
+    ) return;
 
-        // Langsung sembunyikan konten tanpa animasi
-        if (mainContent) mainContent.classList.add("hidden");
+    e.preventDefault();
 
-        // Langsung tampilkan preloader (tanpa fade-in)
-        if (preloader) preloader.classList.remove("hidden");
+    // Sembunyikan konten dan tampilkan preloader
+    if (mainContent) mainContent.classList.add("hidden");
+    if (preloader) preloader.classList.remove("hidden", "fade-out");
 
-        setTimeout(() => {
-          window.location.href = href;
-        }, 800); // Delay supaya preloader terlihat
-      });
-    }
+    // Delay supaya animasi preloader terlihat
+    // setTimeout(() => {
+      window.location.href = href;
+    // }, 600);
   });
 });
+
 
 
 document.addEventListener("DOMContentLoaded", () => {

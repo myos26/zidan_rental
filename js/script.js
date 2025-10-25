@@ -103,31 +103,35 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-(function() {
-  // Cek apakah musik sudah pernah dibuat di sesi ini
-  if (!sessionStorage.getItem("bgm-playing")) {
-    const audio = new Audio("backsound.mp3");
-    audio.loop = true;
-    audio.volume = 0.5;
+(function () {
+  // Jika di dalam iframe, ini adalah player
+  if (window.self !== window.top) {
+    const audio = document.getElementById("bgm");
 
-    // Coba autoplay
-    audio.play().catch(() => {
-      // Kalau gagal autoplay, tunggu user scroll
-      document.addEventListener("scroll", () => {
-        audio.play();
-      }, { once: true });
-    });
+    if (audio) {
+      audio.volume = 0.5;
+      audio.play().catch(() => {
+        // Kalau autoplay gagal (misalnya user belum interaksi)
+        document.addEventListener("click", () => audio.play(), { once: true });
+        document.addEventListener("scroll", () => audio.play(), { once: true });
+      });
 
-    // Tandai sudah main
-    sessionStorage.setItem("bgm-playing", "true");
+      // Hentikan musik kalau tab ditutup
+      window.addEventListener("beforeunload", () => {
+        audio.pause();
+      });
+    }
+    return;
+  }
 
-    // Simpan referensi biar bisa diakses (kalau mau kontrol)
-    window.bgmAudio = audio;
-
-    // Saat tab ditutup, hentikan dan hapus tanda
-    window.addEventListener("beforeunload", () => {
-      audio.pause();
-      sessionStorage.removeItem("bgm-playing");
-    });
+  // Jika bukan iframe (halaman utama)
+  const existing = document.getElementById("bgm-frame");
+  if (!existing) {
+    const iframe = document.createElement("iframe");
+    iframe.src = "player.html";
+    iframe.id = "bgm-frame";
+    iframe.style.display = "none";
+    document.body.appendChild(iframe);
   }
 })();
+

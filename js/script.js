@@ -104,19 +104,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 (function () {
-  // Jika di dalam iframe, ini adalah player
+  // Jika ini di dalam iframe (player.html)
   if (window.self !== window.top) {
     const audio = document.getElementById("bgm");
 
     if (audio) {
       audio.volume = 0.5;
+
+      // Fungsi untuk mencoba play
+      const tryPlay = () => {
+        audio.play().then(() => {
+          document.removeEventListener("scroll", tryPlay);
+          document.removeEventListener("click", tryPlay);
+          document.removeEventListener("touchstart", tryPlay);
+        }).catch(() => {});
+      };
+
+      // Coba autoplay
       audio.play().catch(() => {
-        // Kalau autoplay gagal (misalnya user belum interaksi)
-        document.addEventListener("click", () => audio.play(), { once: true });
-        document.addEventListener("scroll", () => audio.play(), { once: true });
+        document.addEventListener("scroll", tryPlay, { once: true });
+        document.addEventListener("click", tryPlay, { once: true });
+        document.addEventListener("touchstart", tryPlay, { once: true });
       });
 
-      // Hentikan musik kalau tab ditutup
+      // Hentikan musik saat tab ditutup
       window.addEventListener("beforeunload", () => {
         audio.pause();
       });
@@ -124,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // Jika bukan iframe (halaman utama)
+  // Jika ini halaman utama
   const existing = document.getElementById("bgm-frame");
   if (!existing) {
     const iframe = document.createElement("iframe");
@@ -134,4 +145,3 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(iframe);
   }
 })();
-

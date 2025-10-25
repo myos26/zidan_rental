@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Player</title>
+  </head>
+  <body>
+    <audio id="bgm" src="backsound.mp3" loop></audio>
+    <script>
+      const audio = document.getElementById("bgm");
+      audio.volume = 0.5;
+
+      // coba autoplay
+      const tryPlay = () => {
+        audio.play().catch(() => {});
+      };
+
+      audio.play().catch(() => {
+        document.addEventListener("scroll", tryPlay, { once: true });
+        document.addEventListener("click", tryPlay, { once: true });
+        document.addEventListener("touchstart", tryPlay, { once: true });
+      });
+
+      window.addEventListener("beforeunload", () => {
+        audio.pause();
+      });
+    </script>
+  </body>
+</html>

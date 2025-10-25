@@ -713,14 +713,18 @@ span.current {
   }
 }
 
+.gallery_img{
+    padding: 5px;
+}
+
 .gallery_img img {
   width: 100%;
   height: auto;
-  border-radius: 5px;
+  border-radius: 10px;
   max-height: 180px;
   object-fit: contain;
   display: block;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .gallery_box {

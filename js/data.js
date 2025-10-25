@@ -1,36 +1,36 @@
 const galleryData = [
   {
-    img: "images/armada/img-1.png",
+    img: "images/armada/Avanza.png",
     name: "Toyota Avanza",
     price: 450000, // per hari
   },
   {
-    img: "images/armada/img-2.png",
+    img: "images/armada/Ertiga.png",
     name: "Suzuki Ertiga",
     price: 450000, // per hari
   },
   {
-    img: "images/armada/img-3.png",
+    img: "images/armada/Zenix.png",
     name: "Innova Zenix",
     price: 550000,
   },
   {
-    img: "images/armada/img-4.png",
+    img: "images/armada/Innova.png",
     name: "Innova Reborn",
     price: 550000,
   },
   {
-    img: "images/armada/img-5.png",
+    img: "images/armada/HiaceCommuter.png",
     name: "Hiace Commuter (start from)",
     price: 1200000,
   },
   {
-    img: "images/armada/img-6.png",
+    img: "images/armada/HiacePremio.png",
     name: "Hiace Premio (start from)",
     price: 1400000,
   },
   {
-    img: "images/armada/img-7.png",
+    img: "images/armada/Alphard.png",
     name: "Alphard",
     price: 2800000,
   },
@@ -52,6 +52,6 @@ const galleryData = [
     {
     img: "images/armada/JeepTrooper.png",
     name: "Jeep Trooper",
-    price: 0,
+    price: "-",
   },
 ];

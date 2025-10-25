@@ -101,3 +101,33 @@ document.addEventListener("DOMContentLoaded", () => {
     galleryWrapper.appendChild(section);
   }
 });
+
+
+(function() {
+  // Cek apakah musik sudah pernah dibuat di sesi ini
+  if (!sessionStorage.getItem("bgm-playing")) {
+    const audio = new Audio("backsound.mp3");
+    audio.loop = true;
+    audio.volume = 0.5;
+
+    // Coba autoplay
+    audio.play().catch(() => {
+      // Kalau gagal autoplay, tunggu user scroll
+      document.addEventListener("scroll", () => {
+        audio.play();
+      }, { once: true });
+    });
+
+    // Tandai sudah main
+    sessionStorage.setItem("bgm-playing", "true");
+
+    // Simpan referensi biar bisa diakses (kalau mau kontrol)
+    window.bgmAudio = audio;
+
+    // Saat tab ditutup, hentikan dan hapus tanda
+    window.addEventListener("beforeunload", () => {
+      audio.pause();
+      sessionStorage.removeItem("bgm-playing");
+    });
+  }
+})();

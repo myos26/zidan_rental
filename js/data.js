@@ -35,7 +35,7 @@ const galleryData = [
     price: 2800000,
   },
   {
-    img: "images/armada/ElfLong.jpg",
+    img: "images/armada/ElfLong.png",
     name: "Elf Long 17 seats",
     price: 1200000,
   },
@@ -48,5 +48,10 @@ const galleryData = [
     img: "images/armada/BigBus.jpg",
     name: "Big Bus 50–59 seats",
     price: 3000000,
+  },
+    {
+    img: "images/armada/JeepTrooper.png",
+    name: "Jeep Trooper",
+    price: 0,
   },
 ];

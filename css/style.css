@@ -716,6 +716,7 @@ span.current {
 .gallery_img img {
   width: 100%;
   height: auto;
+  border-radius: 5px;
   max-height: 180px;
   object-fit: contain;
   display: block;

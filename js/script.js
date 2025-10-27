@@ -103,45 +103,19 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-(function () {
-  // Jika ini di dalam iframe (player.html)
-  if (window.self !== window.top) {
-    const audio = document.getElementById("bgm");
 
-    if (audio) {
-      audio.volume = 0.5;
 
-      // Fungsi untuk mencoba play
-      const tryPlay = () => {
-        audio.play().then(() => {
-          document.removeEventListener("scroll", tryPlay);
-          document.removeEventListener("click", tryPlay);
-          document.removeEventListener("touchstart", tryPlay);
-        }).catch(() => {});
-      };
 
-      // Coba autoplay
-      audio.play().catch(() => {
-        document.addEventListener("scroll", tryPlay, { once: true });
-        document.addEventListener("click", tryPlay, { once: true });
-        document.addEventListener("touchstart", tryPlay, { once: true });
-      });
+document.addEventListener("DOMContentLoaded", () => {
+  const playerFrame = document.createElement("iframe");
+  playerFrame.src = "player.html";
+  playerFrame.style.display = "none";
+  document.body.appendChild(playerFrame);
 
-      // Hentikan musik saat tab ditutup
-      window.addEventListener("beforeunload", () => {
-        audio.pause();
-      });
+  // Stop musik saat tab ditutup
+  window.addEventListener("beforeunload", () => {
+    if (playerFrame.contentWindow) {
+      playerFrame.contentWindow.postMessage("stopBGM", "*");
     }
-    return;
-  }
-
-  // Jika ini halaman utama
-  const existing = document.getElementById("bgm-frame");
-  if (!existing) {
-    const iframe = document.createElement("iframe");
-    iframe.src = "player.html";
-    iframe.id = "bgm-frame";
-    iframe.style.display = "none";
-    document.body.appendChild(iframe);
-  }
-})();
+  });
+});

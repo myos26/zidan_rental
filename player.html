@@ -1,30 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Music Player</title>
-  </head>
-  <body>
-    <audio id="bgm" src="backsound.mp3" loop></audio>
-    <script>
-      const audio = document.getElementById("bgm");
-      audio.volume = 0.5;
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Player</title>
+</head>
+<body>
+  <audio id="bgm" loop muted></audio>
 
-      // coba autoplay
-      const tryPlay = () => {
-        audio.play().catch(() => {});
-      };
+  <script>
+    const audio = document.getElementById("bgm");
 
-      audio.play().catch(() => {
-        document.addEventListener("scroll", tryPlay, { once: true });
-        document.addEventListener("click", tryPlay, { once: true });
-        document.addEventListener("touchstart", tryPlay, { once: true });
-      });
+    // Load audio via blob agar tidak dianggap "download"
+    fetch("backsound.mp3")
+      .then(res => res.blob())
+      .then(blob => {
+        audio.src = URL.createObjectURL(blob);
 
-      window.addEventListener("beforeunload", () => {
+        // Coba autoplay (muted dulu biar lolos Chrome)
+        audio.play()
+          .then(() => {
+            console.log("Autoplay berhasil (dimulai dalam mode mute)");
+            // Setelah 0.5 detik, naikkan volume pelan
+            setTimeout(() => {
+              audio.muted = false;
+              audio.volume = 0.2;
+              console.log("Volume fade-in aktif 🎧");
+            }, 500);
+          })
+          .catch(err => {
+            console.warn("Autoplay gagal:", err);
+          });
+      })
+      .catch(err => console.error("Gagal memuat audio:", err));
+
+    // Dengar pesan stop/play dari halaman utama
+    window.addEventListener("message", (event) => {
+      if (event.data === "stopBGM") {
         audio.pause();
-      });
-    </script>
-  </body>
+        audio.currentTime = 0;
+      }
+    });
+  </script>
+</body>
 </html>

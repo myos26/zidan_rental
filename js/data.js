@@ -41,7 +41,7 @@ const galleryData = [
   },
   {
     img: "images/armada/MediumBus.jpg",
-    name: "Medium Bus 31–33 seats",
+    name: "Medium Bus 31-35/35-39 seats",
     price: 2000000,
   },
   {

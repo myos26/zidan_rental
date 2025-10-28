@@ -57,13 +57,18 @@ window.addEventListener("load", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   const galleryWrapper = document.getElementById("gallery-wrapper");
-  const phoneNumber = "6282333045805"; // format internasional
+  const modal = document.getElementById("rentalModal");
+  const closeModal = modal.querySelector(".close");
+  const agreeBtn = document.getElementById("agreeBtn");
+  let selectedWaLink = null;
+
+  const phoneNumber = "628133020701";
   const messageTemplate = (name, price) =>
     `Halo, saya tertarik untuk rental ${name} dengan harga Rp${price.toLocaleString(
       "id-ID"
     )}/hari. Apakah masih tersedia?`;
 
-  // Buat row per 3 item
+  // Buat konten gallery
   for (let i = 0; i < galleryData.length; i += 3) {
     const group = galleryData.slice(i, i + 3);
     const section = document.createElement("div");
@@ -71,9 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let rowHTML = '<div class="row">';
     group.forEach((item) => {
-      const formattedPrice = `Mulai dari Rp${item.price.toLocaleString(
-        "id-ID"
-      )}/hari`;
+      const formattedPrice = `Mulai dari Rp${item.price.toLocaleString("id-ID")}/hari`;
       const waLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
         messageTemplate(item.name, item.price)
       )}`;
@@ -87,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <h3 class="types_text">${item.name}</h3>
             <p class="looking_text">${formattedPrice}</p>
             <div class="read_bt">
-              <a href="${waLink}" target="_blank">
+              <a href="#" class="open-modal" data-link="${waLink}">
                 <i class="fab fa-whatsapp"></i> Book Now
               </a>
             </div>
@@ -100,6 +103,30 @@ document.addEventListener("DOMContentLoaded", () => {
     section.innerHTML = rowHTML;
     galleryWrapper.appendChild(section);
   }
+
+  // Event untuk buka modal
+  galleryWrapper.addEventListener("click", (e) => {
+    const btn = e.target.closest(".open-modal");
+    if (btn) {
+      e.preventDefault(); // cegah link langsung
+      selectedWaLink = btn.dataset.link;
+      modal.style.display = "block";
+    }
+  });
+
+  // Tutup modal
+  closeModal.addEventListener("click", () => (modal.style.display = "none"));
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) modal.style.display = "none";
+  });
+
+  // Tombol setuju
+  agreeBtn.addEventListener("click", () => {
+    if (selectedWaLink) {
+      window.open(selectedWaLink, "_blank");
+      modal.style.display = "none";
+    }
+  });
 });
 
 

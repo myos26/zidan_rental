@@ -27,7 +27,7 @@ const galleryData = [
   {
     img: "images/armada/HiacePremio.png",
     name: "Hiace Premio (start from)",
-    price: 1400000,
+    price: 1600000,
   },
   {
     img: "images/armada/Alphard.png",

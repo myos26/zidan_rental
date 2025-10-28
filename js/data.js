@@ -52,6 +52,6 @@ const galleryData = [
     {
     img: "images/armada/JeepTrooper.png",
     name: "Jeep Trooper",
-    price: "-",
+    price: 600000,
   },
 ];

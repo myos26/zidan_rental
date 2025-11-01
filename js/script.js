@@ -133,11 +133,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+// document.addEventListener("DOMContentLoaded", () => {
+//   const playerFrame = document.createElement("iframe");
+//   playerFrame.src = "player.html";
+//   playerFrame.style.display = "none";
+//   document.body.appendChild(playerFrame);
+
+//   // Stop musik saat tab ditutup
+//   window.addEventListener("beforeunload", () => {
+//     if (playerFrame.contentWindow) {
+//       playerFrame.contentWindow.postMessage("stopBGM", "*");
+//     }
+//   });
+// });
+
 document.addEventListener("DOMContentLoaded", () => {
   const playerFrame = document.createElement("iframe");
   playerFrame.src = "player.html";
   playerFrame.style.display = "none";
   document.body.appendChild(playerFrame);
+
+  // Fungsi untuk kirim sinyal play ke iframe
+  const startMusic = () => {
+    if (playerFrame.contentWindow) {
+      playerFrame.contentWindow.postMessage("playBGM", "*");
+      // Hapus listener setelah pertama kali dijalankan
+      document.removeEventListener("touchstart", startMusic);
+      document.removeEventListener("pointerdown", startMusic);
+    }
+  };
+
+  // Trigger musik saat user pertama kali menyentuh layar
+  document.addEventListener("touchstart", startMusic);
+  document.addEventListener("pointerdown", startMusic);
 
   // Stop musik saat tab ditutup
   window.addEventListener("beforeunload", () => {
@@ -146,3 +174,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+

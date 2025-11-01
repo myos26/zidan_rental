@@ -35,11 +35,16 @@
 
     // Dengar pesan stop/play dari halaman utama
     window.addEventListener("message", (event) => {
-      if (event.data === "stopBGM") {
-        audio.pause();
-        audio.currentTime = 0;
-      }
-    });
+  if (event.data === "stopBGM") {
+    audio.pause();
+    audio.currentTime = 0;
+  } else if (event.data === "playBGM") {
+    // iOS Safari: mulai musik setelah ada interaksi user
+    audio.muted = false;
+    audio.volume = 1;
+    audio.play().catch(err => console.warn("iOS autoplay blocked:", err));
+  }
+});
   </script>
 </body>
 </html>

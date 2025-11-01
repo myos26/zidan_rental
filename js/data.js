@@ -7,7 +7,7 @@ const galleryData = [
   {
     img: "images/armada/Ertiga.png",
     name: "Suzuki Ertiga",
-    price: 450000, // per hari
+    price: 650000, // per hari
   },
   {
     img: "images/armada/Zenix.png",
@@ -36,7 +36,7 @@ const galleryData = [
   },
   {
     img: "images/armada/ElfLong.png",
-    name: "Elf Long 17 seats",
+    name: "Elf Long 17/19 seats",
     price: 1200000,
   },
   {

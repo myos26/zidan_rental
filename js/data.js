@@ -2,7 +2,7 @@ const galleryData = [
   {
     img: "images/armada/Avanza.png",
     name: "Toyota Avanza",
-    price: 450000, // per hari
+    price: 650000, // per hari
   },
   {
     img: "images/armada/Ertiga.png",
@@ -12,12 +12,12 @@ const galleryData = [
   {
     img: "images/armada/Zenix.png",
     name: "Innova Zenix",
-    price: 550000,
+    price: 1500000,
   },
   {
     img: "images/armada/Innova.png",
     name: "Innova Reborn",
-    price: 550000,
+    price: 850000,
   },
   {
     img: "images/armada/HiaceCommuter.png",
@@ -32,7 +32,7 @@ const galleryData = [
   {
     img: "images/armada/Alphard.png",
     name: "Alphard",
-    price: 2800000,
+    price: 4000000,
   },
   {
     img: "images/armada/ElfLong.png",
@@ -49,9 +49,19 @@ const galleryData = [
     name: "Big Bus 50–59 seats",
     price: 3000000,
   },
-    {
+  {
     img: "images/armada/JeepTrooper.png",
     name: "Jeep Trooper",
     price: 600000,
+  },
+  {
+    img: "images/armada/Fortuner.png",
+    name: "Fortuner",
+    price: 1800000,
+  },
+  {
+    img: "images/armada/PickUp.png",
+    name: "Pick Up (shuttle koper)",
+    price: 750000,
   },
 ];

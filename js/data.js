@@ -40,12 +40,12 @@ const galleryData = [
     price: 1200000,
   },
   {
-    img: "images/armada/MediumBus.jpg",
+    img: "images/armada/MediumBus.png",
     name: "Medium Bus 31-35/35-39 seats",
     price: 2000000,
   },
   {
-    img: "images/armada/BigBus.jpg",
+    img: "images/armada/BigBus.png",
     name: "Big Bus 50–59 seats",
     price: 3000000,
   },

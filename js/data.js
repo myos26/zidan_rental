@@ -37,7 +37,7 @@ const galleryData = [
   {
     img: "images/armada/ElfLong.png",
     name: "Elf Long 17/19 seats",
-    price: 1200000,
+    price: 1350000,
   },
   {
     img: "images/armada/MediumBus.png",

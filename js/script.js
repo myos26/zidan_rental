@@ -14,44 +14,44 @@ document.querySelectorAll('[data-include]').forEach(el => {
 });
 
 
-window.addEventListener("load", () => {
-  const preloader = document.getElementById("preloader");
-  const mainContent = document.getElementById("main-content");
+// window.addEventListener("load", () => {
+//   const preloader = document.getElementById("preloader");
+//   const mainContent = document.getElementById("main-content");
 
-  // Setelah halaman benar-benar load, sembunyikan preloader pelan-pelan
-  setTimeout(() => {
-    if (preloader) preloader.classList.add("fade-out");
-    setTimeout(() => {
-      if (preloader) preloader.classList.add("hidden");
-      if (mainContent) mainContent.classList.remove("hidden");
-    }, 300);
-  }, 500); // delay kecil biar efeknya smooth
+//   // Setelah halaman benar-benar load, sembunyikan preloader pelan-pelan
+//   setTimeout(() => {
+//     if (preloader) preloader.classList.add("fade-out");
+//     setTimeout(() => {
+//       if (preloader) preloader.classList.add("hidden");
+//       if (mainContent) mainContent.classList.remove("hidden");
+//     }, 300);
+//   }, 500); // delay kecil biar efeknya smooth
 
-  // Delegasi event ke seluruh dokumen untuk handle klik link (termasuk navbar)
-  document.body.addEventListener("click", (e) => {
-    const link = e.target.closest("a");
-    if (!link) return;
+//   // Delegasi event ke seluruh dokumen untuk handle klik link (termasuk navbar)
+//   document.body.addEventListener("click", (e) => {
+//     const link = e.target.closest("a");
+//     if (!link) return;
 
-    const href = link.getAttribute("href");
-    if (
-      !href ||
-      href.startsWith("#") ||
-      href.startsWith("javascript") ||
-      link.hasAttribute("target")
-    ) return;
+//     const href = link.getAttribute("href");
+//     if (
+//       !href ||
+//       href.startsWith("#") ||
+//       href.startsWith("javascript") ||
+//       link.hasAttribute("target")
+//     ) return;
 
-    e.preventDefault();
+//     e.preventDefault();
 
-    // Sembunyikan konten dan tampilkan preloader
-    if (mainContent) mainContent.classList.add("hidden");
-    if (preloader) preloader.classList.remove("hidden", "fade-out");
+//     // Sembunyikan konten dan tampilkan preloader
+//     if (mainContent) mainContent.classList.add("hidden");
+//     if (preloader) preloader.classList.remove("hidden", "fade-out");
 
-    // Delay supaya animasi preloader terlihat
-    // setTimeout(() => {
-      window.location.href = href;
-    // }, 600);
-  });
-});
+//     // Delay supaya animasi preloader terlihat
+//     // setTimeout(() => {
+//       window.location.href = href;
+//     // }, 600);
+//   });
+// });
 
 
 

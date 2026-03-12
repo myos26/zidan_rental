@@ -12,7 +12,7 @@ const galleryData = [
   {
     img: "images/armada/Zenix.png",
     name: "Innova Zenix",
-    price: 1500000,
+    price: 1300000,
   },
   {
     img: "images/armada/Innova.png",
@@ -22,17 +22,17 @@ const galleryData = [
   {
     img: "images/armada/HiaceCommuter.png",
     name: "Hiace Commuter (start from)",
-    price: 1200000,
+    price: 1300000,
   },
   {
     img: "images/armada/HiacePremio.png",
     name: "Hiace Premio (start from)",
-    price: 1600000,
+    price: 1500000,
   },
   {
     img: "images/armada/Alphard.png",
     name: "Alphard",
-    price: 4000000,
+    price: 3500000,
   },
   {
     img: "images/armada/ElfLong.png",
@@ -57,11 +57,11 @@ const galleryData = [
   {
     img: "images/armada/Fortuner.png",
     name: "Fortuner",
-    price: 1800000,
+    price: 1500000,
   },
   {
     img: "images/armada/PickUp.png",
     name: "Pick Up (shuttle koper)",
-    price: 750000,
+    price: 500000,
   },
 ];
